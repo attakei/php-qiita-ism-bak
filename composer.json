@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/lumen-framework": "5.2.*",
         "vlucas/phpdotenv": "~2.2",
-        "lusitanian/oauth": "^0.8.8"
+        "lusitanian/oauth": "^0.8.8",
+        "michelf/php-markdown": "^1.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
