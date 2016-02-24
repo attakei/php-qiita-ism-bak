@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -18,4 +19,14 @@ $app->get('/', function () use ($app) {
 /** Login and authenticate */
 $app->get('/login',
     ['as' => 'login', 'uses' => 'AuthController@loginForm']
+);
+
+
+/** Debugging routing */
+$app->get('/debug',
+    function () use ($app)
+    {
+        $results = User::all();
+        print_r($results);
+    }
 );
