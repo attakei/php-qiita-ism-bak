@@ -14,3 +14,8 @@
 $app->get('/', function () use ($app) {
     return $app->version();
 });
+
+/** Login and authenticate */
+$app->get('/login',
+    ['as' => 'login', 'uses' => 'AuthController@loginForm']
+);
