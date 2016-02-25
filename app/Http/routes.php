@@ -44,3 +44,19 @@ $app->get('/state',
         }
     ]
 );
+
+$app->group(
+    ['prefix' => '_debug'],
+    function () use ($app)
+    {
+        $app->get('/me',
+            [
+                'middleware' => 'auth',
+                function ()
+                {
+                    return view('top.me');
+                }
+            ]
+        );
+    }
+);
