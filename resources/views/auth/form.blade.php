@@ -53,7 +53,7 @@
                 <label for="authEmail">Email address</label>
                 <input type="email" class="form-control" id="authEmail" name="email" placeholder="Email">
             </div>
-            <button type="submit" class="btn btn-default">サインアップ/ログイン</button>
+            <button type="button" class="btn btn-default" id="submitAuth">サインアップ/ログイン</button>
         </form>
     </div>
 
@@ -64,6 +64,36 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script>
+    $('#submitAuth').click(function(event){
+        var formData = {};
+        formData['email'] = $('#authEmail')[0].value;
+        $.ajax({
+            data: formData,
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                event.target.innerHTML = '認証中';
+            },
+            complete: function(xhr, textStatus) {
+                event.target.innerHTML = 'サインアップ/ログイン';
+            },
+            error: function(xhr, status, err) {
+                if (xhr.status == 401) {
+                    msg = '';
+                }
+                console.log();
+            },
+            success: function(data, dataType) {
+                console.log('OK');
+                if (typeof data.token !== "undefined") {
+                    Cookies.set('token', data.token);
+                }
+            },
+            type: 'POST',
+        });
+    });
+</script>
 </body>
 </html>

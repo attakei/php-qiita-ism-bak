@@ -20,12 +20,14 @@ class AuthController extends Controller
      */
     public function doLogin(Request $request)
     {
+        sleep(2);
+        $message = 'Invalid email';
         if (! $request->has('email') ) {
-            return abort(Response::HTTP_UNAUTHORIZED);
+            return abort(Response::HTTP_UNAUTHORIZED, $message);
         }
         $user = User::where('email', $request->input('email'))->first();
         if ( is_null($user) ) {
-            return abort(Response::HTTP_UNAUTHORIZED);
+            return abort(Response::HTTP_UNAUTHORIZED, $message);
         }
         $user->regenerateToken();
         return ['token' => $user->token];
