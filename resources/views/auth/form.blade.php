@@ -87,8 +87,12 @@
             },
             success: function(data, dataType) {
                 console.log('OK');
-                if (typeof data.token !== "undefined") {
+                if (typeof data.token !== 'undefined') {
                     Cookies.set('token', data.token);
+                }
+                if (typeof data.nextUrl !== 'undefined') {
+                    location.href = data.nextUrl;
+                    return;
                 }
             },
             type: 'POST',

@@ -30,7 +30,12 @@ class AuthController extends Controller
             return abort(Response::HTTP_UNAUTHORIZED, $message);
         }
         $user->regenerateToken();
-        return ['token' => $user->token];
+        if ( true ) {
+            // TODO: debugging now
+            $url = route('debug_state');
+        }
+        return ['token' => $user->token, 'nextUrl' => $url];
+    }
     }
 
 }

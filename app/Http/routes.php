@@ -34,3 +34,13 @@ $app->get('/debug',
         print_r($results);
     }
 );
+$app->get('/state',
+    [
+        'as' => 'debug_state',
+        'middleware' => 'auth',
+        function ()
+        {
+            return 'OK';
+        }
+    ]
+);
