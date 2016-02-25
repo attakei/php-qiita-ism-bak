@@ -16,8 +16,9 @@ class CreateUsers extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email');
+            $table->string('password');
             $table->string('role');
-            $table->string('api_token');
+            $table->string('token');
             $table->timestamps();
         });
     }
