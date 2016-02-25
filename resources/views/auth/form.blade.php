@@ -17,7 +17,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="navbar.css" rel="stylesheet">
+    <link href="/css/navbar.css" rel="stylesheet">
 
 </head>
 
