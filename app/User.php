@@ -31,4 +31,12 @@ class User extends Model implements
     protected $hidden = [
         'password',
     ];
+
+    public function regenerateToken()
+    {
+        $newToken = 'aaa';
+        $this->token = $newToken;
+        $this->save();
+        return $newToken;
+    }
 }

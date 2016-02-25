@@ -20,6 +20,10 @@ $app->get('/', function () use ($app) {
 $app->get('/login',
     ['as' => 'login', 'uses' => 'AuthController@loginForm']
 );
+$app->post('/login',
+    ['as' => 'login_do', 'uses' => 'AuthController@doLogin']
+);
+
 
 
 /** Debugging routing */
