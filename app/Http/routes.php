@@ -18,7 +18,7 @@ $app->get('/', function () use ($app) {
 
 /** Login and authenticate */
 $app->get('/login',
-    ['as' => 'login', 'uses' => 'AuthController@loginForm']
+    ['as' => 'login_form', 'uses' => 'AuthController@loginForm']
 );
 $app->post('/login',
     ['as' => 'login_do', 'uses' => 'AuthController@doLogin']
