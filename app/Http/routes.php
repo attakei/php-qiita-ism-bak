@@ -1,62 +1,31 @@
 <?php
 
-use App\Models\User;
+/*
+|--------------------------------------------------------------------------
+| Routes File
+|--------------------------------------------------------------------------
+|
+| Here is where you will register all of the routes in an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
+| This route group applies the "web" middleware group to every route
+| it contains. The "web" middleware group is defined in your HTTP
+| kernel and includes session state, CSRF protection, and more.
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
+Route::group(['middleware' => ['web']], function () {
+    //
 });
-
-/** Login and authenticate */
-$app->get('/login',
-    ['as' => 'login_form', 'uses' => 'AuthController@loginForm']
-);
-$app->post('/login',
-    ['as' => 'login_do', 'uses' => 'AuthController@doLogin']
-);
-
-
-
-/** Debugging routing */
-$app->get('/debug',
-    function () use ($app)
-    {
-        $results = User::all();
-        print_r($results);
-    }
-);
-$app->get('/state',
-    [
-        'as' => 'debug_state',
-        'middleware' => 'auth',
-        function ()
-        {
-            return 'OK';
-        }
-    ]
-);
-
-$app->group(
-    ['prefix' => '_debug'],
-    function () use ($app)
-    {
-        $app->get('/me',
-            [
-                'middleware' => 'auth',
-                function ()
-                {
-                    return view('top.me');
-                }
-            ]
-        );
-    }
-);
