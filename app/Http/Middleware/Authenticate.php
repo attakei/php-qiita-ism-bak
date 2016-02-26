@@ -36,6 +36,7 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
+            return redirect()->route('login_form', ['nextUrl' => $request->url()]);
             return response('Unauthorized.', 401);
         }
 
