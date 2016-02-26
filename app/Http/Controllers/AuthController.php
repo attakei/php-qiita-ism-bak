@@ -8,9 +8,9 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function loginForm()
+    public function loginForm(Request $request)
     {
-        return view('auth.form');
+        return view('auth.form', ['nextUrl' => $request->input('nextUrl', null)]);
     }
 
     /**
@@ -30,12 +30,13 @@ class AuthController extends Controller
             return abort(Response::HTTP_UNAUTHORIZED, $message);
         }
         $user->regenerateToken();
-        if ( true ) {
+        if ( $request->has('nextUrl') ) {
+            $url = $request->input('nextUrl');
+        } else {
             // TODO: debugging now
             $url = route('debug_state');
         }
         return ['token' => $user->token, 'nextUrl' => $url];
-    }
     }
 
 }

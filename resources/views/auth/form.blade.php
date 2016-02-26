@@ -7,6 +7,9 @@
     <form method="post" style="width:50%;">
         <div class="form-group">
             <label for="authEmail">Email address</label>
+            @if( !is_null($nextUrl) )
+                <input type="hidden" name="nextUrl" value="{{ $nextUrl }}" >
+            @endif
             <input type="email" class="form-control" id="authEmail" name="email" placeholder="Email">
         </div>
         <button type="button" class="btn btn-default" id="submitAuth">サインアップ/ログイン</button>
