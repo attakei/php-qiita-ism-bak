@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -17,5 +18,45 @@ $app->get('/', function () use ($app) {
 
 /** Login and authenticate */
 $app->get('/login',
-    ['as' => 'login', 'uses' => 'AuthController@loginForm']
+    ['as' => 'login_form', 'uses' => 'AuthController@loginForm']
+);
+$app->post('/login',
+    ['as' => 'login_do', 'uses' => 'AuthController@doLogin']
+);
+
+
+
+/** Debugging routing */
+$app->get('/debug',
+    function () use ($app)
+    {
+        $results = User::all();
+        print_r($results);
+    }
+);
+$app->get('/state',
+    [
+        'as' => 'debug_state',
+        'middleware' => 'auth',
+        function ()
+        {
+            return 'OK';
+        }
+    ]
+);
+
+$app->group(
+    ['prefix' => '_debug'],
+    function () use ($app)
+    {
+        $app->get('/me',
+            [
+                'middleware' => 'auth',
+                function ()
+                {
+                    return view('top.me');
+                }
+            ]
+        );
+    }
 );

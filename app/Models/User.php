@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
@@ -31,4 +31,12 @@ class User extends Model implements
     protected $hidden = [
         'password',
     ];
+
+    public function regenerateToken()
+    {
+        $newToken = 'aaa';
+        $this->token = $newToken;
+        $this->save();
+        return $newToken;
+    }
 }
