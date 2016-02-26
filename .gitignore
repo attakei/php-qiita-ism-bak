@@ -7,8 +7,10 @@ app/storage/
 
 # Laravel 5 & Lumen specific
 bootstrap/cache/
-storage/
 .env.*.php
 .env.php
 .env
-.env.example
+
+# JetBrains IDE
+.idea
+*.iml
