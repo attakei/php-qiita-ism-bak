@@ -21,13 +21,17 @@ class AuthController extends Controller
     public function doLogin(Request $request)
     {
         sleep(2);
-        $message = 'Invalid email';
+        $message = 'Login failed';
         if (! $request->has('email') ) {
             return abort(Response::HTTP_UNAUTHORIZED, $message);
         }
         $user = User::where('email', $request->input('email'))->first();
         if ( is_null($user) ) {
             return abort(Response::HTTP_UNAUTHORIZED, $message);
+        }
+        if ( !password_verify($request->input('password'), $user->password) ) {
+            return abort(Response::HTTP_UNAUTHORIZED, $message);
+
         }
         $user->regenerateToken();
         if ( $request->has('nextUrl') ) {
