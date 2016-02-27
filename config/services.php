@@ -35,4 +35,8 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'google' => [
+        'client_id' => env('OAUTH_CLIENT', 'your-github-app-id'),
+        'client_secret' => env('OAUTH_SECRET', 'your-github-app-secret'),
+    ],
 ];
