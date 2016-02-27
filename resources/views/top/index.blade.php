@@ -21,9 +21,6 @@
                     Google アカウントでログイン
                 </form>
             </div>
-            <div class="col-sm-6">
-                @include('_snippet.auth.login')
-            </div>
         </div>
     </div> <!-- /container -->
 
