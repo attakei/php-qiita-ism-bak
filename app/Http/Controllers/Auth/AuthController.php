@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Socialite;
 
+
 class AuthController extends Controller
 {
     /*
@@ -74,5 +75,11 @@ class AuthController extends Controller
     public function redirectToProvider()
     {
         return Socialite::driver('google')->redirect();
+    }
+
+    public function callbackFromProvider()
+    {
+        $userData = Socialite::with('google')->user();
+        return "Hello ".$userData->getName();
     }
 }
