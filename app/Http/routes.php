@@ -29,3 +29,11 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+
+/*
+|---------------------------------------
+| Authentication
+|---------------------------------------
+*/
+Route::post('/auth/google', ['as' => 'auth_oauth_google', 'uses' => 'Auth\AuthController@redirectToProvider']);

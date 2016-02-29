@@ -17,8 +17,8 @@
         <div class="row">
             <h2>Login / SignUp</h2>
             <div class="col-sm-offset-1 col-sm-5">
-                <form>
-                    Google アカウントでログイン
+                <form action="{{ route('auth_oauth_google') }}" method="post">
+                    <button type="submit">Google アカウントでログイン</button>
                 </form>
             </div>
         </div>

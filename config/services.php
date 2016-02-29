@@ -38,5 +38,6 @@ return [
     'google' => [
         'client_id' => env('OAUTH_CLIENT', 'your-github-app-id'),
         'client_secret' => env('OAUTH_SECRET', 'your-github-app-secret'),
+        'redirect' => env('OAUTH_REDIRECT', 'http://your-callback-url'),
     ],
 ];
