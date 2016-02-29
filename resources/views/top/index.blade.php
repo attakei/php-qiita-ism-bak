@@ -18,6 +18,7 @@
             <h2>Login / SignUp</h2>
             <div class="col-sm-offset-1 col-sm-5">
                 <form action="{{ route('auth_oauth_google') }}" method="post">
+                    {{ csrf_field() }}
                     <button type="submit">Google アカウントでログイン</button>
                 </form>
             </div>

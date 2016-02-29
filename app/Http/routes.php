@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('top.index');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -27,13 +23,9 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::get('/', function () {
+        return view('top.index');
+    });
+
+    Route::post('/auth/google', ['as' => 'auth_oauth_google', 'uses' => 'Auth\AuthController@redirectToProvider']);
 });
-
-
-/*
-|---------------------------------------
-| Authentication
-|---------------------------------------
-*/
-Route::post('/auth/google', ['as' => 'auth_oauth_google', 'uses' => 'Auth\AuthController@redirectToProvider']);
