@@ -32,4 +32,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/auth/google/callback', ['as' => 'auth_oauth_callback', 'uses' => 'Auth\AuthController@callbackFromProvider']);
 
     Route::get('/dashboard', 'HomeController@dashboard');
+
+    Route::get('/article/_new', ['as' => 'form_new_article', 'uses' => 'ArticleController@newForm']);
 });
