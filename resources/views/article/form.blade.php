@@ -6,28 +6,33 @@
         <h1>新規投稿追加</h1>
         <div class="col-md-10">
             <form>
-                <label>タイトル</label>
-                <input class="form-control" type="text" placeholder="Default input">
-                <div>
-                  <!-- Nav tabs -->
-                  <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#edit" aria-controls="edit" role="tab" data-toggle="tab">編集</a></li>
-                    <li role="presentation"><a href="#preview" aria-controls="preview" role="tab" data-toggle="tab">プレビュー</a></li>
-                  </ul>
-
-                  <!-- Tab panes -->
-                  <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="edit">
-                        <textarea name="articleBody"></textarea>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="preview"></div>
-                  </div>
-
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Title ?">
                 </div>
-
-                <button type="button" class="btn btn-default btn-lg active">保存する</button>
+                <div class="form-group">
+                    <textarea name="content" data-provide="markdown" rows="10"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline">
+                      <input type="radio" name="articleStatus" id="articleStatusDraft" value="draft"> 下書きのまま
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="articleStatus" id="articleStatusInternal" value="internal"> 社内公開する
+                    </label>
+                </div>
+                <div class="text-right">
+                    <button type="button" class="btn active">保存する</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
+@endsection
+
+@section('page_css')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.10.0/css/bootstrap-markdown.min.css" rel="stylesheet">
+@endsection
+
+@section('page_js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.10.0/js/bootstrap-markdown.min.js"></script>
 @endsection
