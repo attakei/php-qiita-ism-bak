@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+            @if(env('OAUTH_ONLY') === false)
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
@@ -60,6 +61,7 @@
                     </form>
                 </div>
             </div>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">OAuth login</div>
                 <div class="panel-body">
