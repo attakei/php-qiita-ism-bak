@@ -11,12 +11,6 @@
 |
 */
 
-// NOTE: Current webapp is private only. Top page require authenticated.
-Route::get('/', ['middleware' => ['web', 'auth'], function ()
-{
-    return view('top.index');
-}]);
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -35,5 +29,5 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/home', 'HomeController@index');
+    Route::get('/', 'HomeController@index');
 });
