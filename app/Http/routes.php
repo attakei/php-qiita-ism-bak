@@ -24,7 +24,7 @@
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
-        return view('top.index');
+        return redirect('/dashboard');
     });
 
     Route::auth();
