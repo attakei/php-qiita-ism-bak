@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
+// NOTE: Current webapp is private only. Top page require authenticated.
+Route::get('/', ['middleware' => ['web', 'auth'], function ()
+{
     return view('top.index');
-});
+}]);
 
 /*
 |--------------------------------------------------------------------------
