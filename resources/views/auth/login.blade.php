@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
@@ -58,6 +58,19 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">OAuth login</div>
+                <div class="panel-body">
+                    <div class="col-md-offset-2">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ route('auth_oauth_google') }}">
+                        {!! csrf_field() !!}
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-btn fa-sign-in"></i>Login as Google
+                        </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
