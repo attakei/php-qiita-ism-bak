@@ -55,7 +55,7 @@
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
-                        @if(env('OAUTH_ONLY') === false)
+                        @if(env('OAUTH_ONLY', false) === false)
                         <li><a href="{{ url('/register') }}">Register</a></li>
                         @endif
                     @else
