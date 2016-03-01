@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\Guard;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -78,7 +79,7 @@ class AuthController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-    public function callbackFromProvider(Request $request)
+    public function callbackFromProvider(Request $request, Guard $auth)
     {
         $userData = Socialite::with('google')->user();
         $user = User::query()->where('email', '=', $userData->getEmail())->first();
@@ -90,7 +91,7 @@ class AuthController extends Controller
             ]);
             $user->save();
         }
-        $this->login($request);
+        $auth->login($user);
         return "Hello ".$userData->getName();
     }
 }
