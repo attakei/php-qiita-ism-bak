@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Validator;
 use Auth;
+use DB;
 use App\Http\Requests;
 use App\Article;
 use Illuminate\Http\Request;
@@ -50,7 +51,12 @@ class ArticleController extends Controller
             'status' => $request->input('articleStatus'),
         ];
         $article = Article::create($params);
-        $article->save();
-        print($article->id);
+        DB::transaction(function () use ($article, $request)
+        {
+            $article->save();
+            $request->session()->flash('article_is_created', 'New article is created');
+        });
+        return redirect(route('get_article_single', ['articleId' => $article->id]));
+    }
     }
 }
