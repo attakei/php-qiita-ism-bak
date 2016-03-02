@@ -54,9 +54,22 @@ class ArticleController extends Controller
         DB::transaction(function () use ($article, $request)
         {
             $article->save();
-            $request->session()->flash('article_is_created', 'New article is created');
+            $request->session()->flash('flash_message', 'New article is created');
         });
         return redirect(route('get_article_single', ['articleId' => $article->id]));
     }
+
+    public function getOne($articleId)
+    {
+        $article = Article::find($articleId);
+        // If article is not found, abort request.
+        if ( is_null($article) ) {
+            return abort(404);
+        }
+
+        // Render article
+        return view('article.single', [
+            'article' => $article,
+        ]);
     }
 }
