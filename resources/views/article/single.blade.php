@@ -8,5 +8,9 @@
         @if (Session::has('flash_message'))
         <div class="alert alert-success">{{ Session::get('flash_message') }}</div>
         @endif
+    </div>
+    <div class="row">
+        {!! $parser->parse($article->body) !!}
+    </div>
 </div>
 @endsection

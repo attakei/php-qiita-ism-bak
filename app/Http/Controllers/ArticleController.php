@@ -70,6 +70,7 @@ class ArticleController extends Controller
         // Render article
         return view('article.single', [
             'article' => $article,
+            'parser' => new \cebe\markdown\GithubMarkdown(),
         ]);
     }
 }
