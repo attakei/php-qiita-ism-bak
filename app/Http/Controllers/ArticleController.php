@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use Illuminate\Http\Request;
 use Validator;
+use Auth;
+use App\Http\Requests;
+use App\Article;
+use Illuminate\Http\Request;
 
 
 class ArticleController extends Controller
@@ -35,9 +37,20 @@ class ArticleController extends Controller
             'articleStatus' => 'required',
             ]
         );
-        
+        // If validate is NG, return form view
         if ( $validator->fails() ) {
             return view('article.form', ['errors' => $validator->errors()]);
         }
+
+        // Post validated values
+        $params = [
+            'author_id' => Auth::user()->id,
+            'title' => $request->input('articleTitle'),
+            'body' => $request->input('articleBody'),
+            'status' => $request->input('articleStatus'),
+        ];
+        $article = Article::create($params);
+        $article->save();
+        print($article->id);
     }
 }
