@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Article;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Auth;
+use Validator;
+
 
 class ArticleController extends Controller
 {
@@ -27,13 +27,17 @@ class ArticleController extends Controller
         return view('article.form');
     }
 
-    /**
-     * Submit as new post
-     *
-     * @param Request $request
-     */
     public function postOne(Request $request)
     {
-        $author = Auth::user();
+        $validator = Validator::make($request->all(), [
+            'articleTitle' => 'required',
+            'articleBody' => 'required',
+            'articleStatus' => 'required',
+            ]
+        );
+        
+        if ( $validator->fails() ) {
+            return view('article.form', ['errors' => $validator->errors()]);
+        }
     }
 }
