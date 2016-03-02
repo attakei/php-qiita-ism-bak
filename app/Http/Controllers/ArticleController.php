@@ -73,4 +73,15 @@ class ArticleController extends Controller
             'parser' => new \cebe\markdown\GithubMarkdown(),
         ]);
     }
+
+    public function getList()
+    {
+        // $articles = Article::where(1, 1)->all()->sortByDesc('created_at')->slice(0, 10)->all();
+        $articles = Article::latest()->offset(0)->limit(10)->get();
+
+        // Render articles
+        return view('article.list', [
+            'articles' => $articles,
+        ]);
+    }
 }
