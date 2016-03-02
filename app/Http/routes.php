@@ -33,5 +33,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/dashboard', 'HomeController@dashboard');
 
-    Route::get('/article/_new', ['as' => 'form_new_article', 'uses' => 'ArticleController@newForm']);
+    Route::get('/articles/_new', ['as' => 'form_new_article', 'uses' => 'ArticleController@newForm']);
+    Route::post('/articles/_new', ['as' => 'post_new_article', 'uses' => 'ArticleController@postOne']);
 });

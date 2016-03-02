@@ -5,7 +5,8 @@
     <div class="row">
         <h1>新規投稿追加</h1>
         <div class="col-md-10">
-            <form>
+            <form action="post">
+                {!! csrf_field() !!}}}
                 <div class="form-group">
                     <input class="form-control" type="text" placeholder="Title ?">
                 </div>

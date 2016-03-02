@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Auth;
 
 class ArticleController extends Controller
 {
@@ -23,5 +25,15 @@ class ArticleController extends Controller
     public function newForm()
     {
         return view('article.form');
+    }
+
+    /**
+     * Submit as new post
+     *
+     * @param Request $request
+     */
+    public function postOne(Request $request)
+    {
+        $author = Auth::user();
     }
 }
