@@ -3,11 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <h1>List of articles ({{ $articles->currentPage() }}/{{$articles->lastPage()}})</h1>
+        <h1>Latest articles ({{ $articles->currentPage() }}/{{$articles->lastPage()}})</h1>
     </div>
     <div class="row">
         @foreach($articles as $article)
-        <p><a href="{{ route('get_article_single', $article->id) }}">{{ $article->title }}</a></p>
+            <div class="well well-sm">
+                <h3><a href="{{ route('get_article_single', $article->id) }}">{{ $article->title }}</a></h3>
+            </div>
         @endforeach
         <nav>
             <ul class="pagination pagination-sm">
