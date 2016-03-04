@@ -82,13 +82,10 @@ class ArticleController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getList(Request $request)
+    public function getList()
     {
-        $page = intval($request->input('page', 1));
-        $offset = static::ITEMS_PER_PAGE * ($page - 1);
-
         // TODO: Move to model method
-        $articles = Article::latest()->where('status', 'internal')->offset($offset)->limit(static::ITEMS_PER_PAGE)->get();
+        $articles = Article::latest()->where('status', 'internal')->paginate(static::ITEMS_PER_PAGE);
 
         // TODO: If $articles is not values ?
 
