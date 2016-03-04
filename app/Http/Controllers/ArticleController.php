@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    const ITEMS_PER_PAGE = 20;
+
     /**
      * Create a new controller instance.
      *
@@ -74,9 +76,22 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function getList()
+    /**
+     * 表示可能な記事リストを表示する
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getList(Request $request)
     {
-        $articles = Article::latest()->where('status', 'internal')->offset(0)->limit(10)->get();
+        $page = intval($request->input('page', 1));
+        $offset = static::ITEMS_PER_PAGE * ($page - 1);
+
+        // TODO: Move to model method
+        $articles = Article::latest()->where('status', 'internal')->offset($offset)->limit(static::ITEMS_PER_PAGE)->get();
+
+        // TODO: If $articles is not values ?
+
 
         // Render articles
         return view('article.list', [
