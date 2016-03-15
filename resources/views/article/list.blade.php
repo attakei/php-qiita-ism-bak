@@ -9,6 +9,7 @@
         @foreach($articles as $article)
             <div class="well well-sm">
                 <h3><a href="{{ route('get_article_single', $article->id) }}">{{ $article->title }}</a></h3>
+                <p class="text-right">by {{ $article->author->name }}</p>
             </div>
         @endforeach
         <nav>
