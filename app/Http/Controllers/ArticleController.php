@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    const ITEMS_PER_PAGE = 20;
+
     /**
      * Create a new controller instance.
      *
@@ -71,6 +73,26 @@ class ArticleController extends Controller
         return view('article.single', [
             'article' => $article,
             'parser' => new \cebe\markdown\GithubMarkdown(),
+        ]);
+    }
+
+    /**
+     * 表示可能な記事リストを表示する
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getList()
+    {
+        // TODO: Move to model method
+        $articles = Article::latest()->where('status', 'internal')->paginate(static::ITEMS_PER_PAGE);
+
+        // TODO: If $articles is not values ?
+
+
+        // Render articles
+        return view('article.list', [
+            'articles' => $articles,
         ]);
     }
 }

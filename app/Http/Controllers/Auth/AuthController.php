@@ -92,6 +92,6 @@ class AuthController extends Controller
             $user->save();
         }
         $auth->login($user);
-        return "Hello ".$userData->getName();
+        return redirect('/dashboard');
     }
 }

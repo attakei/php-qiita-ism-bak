@@ -49,6 +49,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/articles') }}">Articles</a></li>
                     <li><a href="{{ route('form_new_article') }}">New</a></li>
                 </ul>
 
