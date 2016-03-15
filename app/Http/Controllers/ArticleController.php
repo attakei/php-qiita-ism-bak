@@ -31,9 +31,21 @@ class ArticleController extends Controller
     {
         return view('article.form', [
                 'article' => new Article(['status' => 'draft']),
-                'mode' => 'create',
             ]
         );
+    }
+
+    public function editForm($articleId)
+    {
+        $article = Article::find($articleId);
+        // If article is not found, abort request.
+        if ( is_null($article) ) {
+            return abort(404);
+        }
+        return view('article.form', [
+            'article' => $article,
+        ]);
+
     }
 
     public function postOne(Request $request)
@@ -51,32 +63,26 @@ class ArticleController extends Controller
 
         // Post validated values
         $params = [
-            'author_id' => Auth::user()->id,
             'title' => $request->input('articleTitle'),
             'body' => $request->input('articleBody'),
             'status' => $request->input('articleStatus'),
         ];
-        $article = Article::create($params);
-        DB::transaction(function () use ($article, $request)
+        if ($request->input('_article_id')) {
+            $article = Article::find($request->input('_article_id'));
+            $message = 'Article is updated';
+        } else {
+            $article = Article::create(['author_id' => Auth::user()->id]);
+            $message = 'New article is created';
+        }
+        foreach ($params as $attr => $val) {
+            $article->{$attr} = $val;
+        }
+        DB::transaction(function () use ($article, $request, $message)
         {
             $article->save();
-            $request->session()->flash('flash_message', 'New article is created');
+            $request->session()->flash('flash_message', $message);
         });
         return redirect(route('get_article_single', ['articleId' => $article->id]));
-    }
-
-    public function editForm($articleId)
-    {
-        $article = Article::find($articleId);
-        // If article is not found, abort request.
-        if ( is_null($article) ) {
-            return abort(404);
-        }
-        return view('article.form', [
-            'article' => $article,
-            'mode' => 'update',
-        ]);
-
     }
 
     public function getOne($articleId)
