@@ -29,7 +29,11 @@ class ArticleController extends Controller
      */
     public function newForm()
     {
-        return view('article.form');
+        return view('article.form', [
+                'article' => new Article(['status' => 'draft']),
+                'mode' => 'create',
+            ]
+        );
     }
 
     public function postOne(Request $request)
@@ -59,6 +63,20 @@ class ArticleController extends Controller
             $request->session()->flash('flash_message', 'New article is created');
         });
         return redirect(route('get_article_single', ['articleId' => $article->id]));
+    }
+
+    public function editForm($articleId)
+    {
+        $article = Article::find($articleId);
+        // If article is not found, abort request.
+        if ( is_null($article) ) {
+            return abort(404);
+        }
+        return view('article.form', [
+            'article' => $article,
+            'mode' => 'update',
+        ]);
+
     }
 
     public function getOne($articleId)

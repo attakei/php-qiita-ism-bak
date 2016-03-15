@@ -16,18 +16,21 @@
             @endif
             <form method="post">
                 {!! csrf_field() !!}
+                {{ Form::hidden('mode', $mode) }}
                 <div class="form-group">
-                    <input class="form-control" type="text" name="articleTitle" placeholder="Title ?">
+                    <input class="form-control" type="text" name="articleTitle" placeholder="Title ?" value="{{$article->title}}">
                 </div>
                 <div class="form-group">
-                    <textarea name="articleBody" data-provide="markdown" rows="10"></textarea>
+                    <textarea name="articleBody" data-provide="markdown" rows="10">{{$article->body}}</textarea>
                 </div>
                 <div class="form-group">
                     <label class="radio-inline">
-                      <input type="radio" name="articleStatus" id="articleStatusDraft" value="draft" checked> 下書きのまま
+                        {{ Form::radio('articleStatus', 'draft', $article->status == 'draft', ['id' => 'articleStatusDraft']) }}
+                        下書きのまま
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" name="articleStatus" id="articleStatusInternal" value="internal"> 社内公開する
+                        {{ Form::radio('articleStatus', 'internal', $article->status == 'internal', ['id' => 'articleStatusInternal']) }}
+                        社内公開する
                     </label>
                 </div>
                 <div class="text-right">

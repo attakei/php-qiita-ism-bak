@@ -37,5 +37,5 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/articles/_new', ['as' => 'form_new_article', 'uses' => 'ArticleController@newForm']);
     Route::post('/articles/_new', ['as' => 'post_new_article', 'uses' => 'ArticleController@postOne']);
     Route::get('/articles/{articleId}', ['as' => 'get_article_single', 'uses' => 'ArticleController@getOne']);
-    Route::get('/articles/{articleId}/_edit', ['as' => 'get_article_single', 'uses' => 'ArticleController@getOne']);
+    Route::get('/articles/{articleId}/_edit', ['as' => 'form_edit_article', 'uses' => 'ArticleController@editForm']);
 });
