@@ -4,7 +4,9 @@
 <div class="container">
     <div class="row">
         <h1>{{ $article->title }}</h1>
-        <form action="{{ '/articles/' . $article->id . '/_edit' }}"><button>編集する</button></form>
+        <form action="{{ '/articles/' . $article->id . '/_edit' }}">
+            <button type="submit" class="btn btn-default">編集する</button>
+        </form>
         {{-- フラッシュメッセージの表示 --}}
         @if (Session::has('flash_message'))
         <div class="alert alert-success">{{ Session::get('flash_message') }}</div>
