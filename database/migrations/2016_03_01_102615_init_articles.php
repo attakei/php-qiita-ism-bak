@@ -17,9 +17,9 @@ class InitArticles extends Migration
             $table->string('title');
             $table->text('body');
             $table->string('status');
-            $table->integer('author_id');
-            $table->foreign('author_id')->references('id')->on('users');
+            $table->integer('author_id')->unsigned();
             $table->timestamps();
+            $table->foreign('author_id')->references('id')->on('users');
         });
     }
 
