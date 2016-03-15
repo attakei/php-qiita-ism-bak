@@ -9,7 +9,10 @@
         @foreach($articles as $article)
             <div class="well well-sm">
                 <h3><a href="{{ route('get_article_single', $article->id) }}">{{ $article->title }}</a></h3>
-                <p class="text-right">by {{ $article->author->name }}</p>
+                <p class="text-right">
+                    by {{ $article->author->name }}
+                    at {{ $article->updated_at}}
+                </p>
             </div>
         @endforeach
         <nav>
