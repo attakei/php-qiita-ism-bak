@@ -11,9 +11,10 @@ WORKDIR /app
 
 # deploy app
 COPY . /app
-RUN composer install --no-scripts
+RUN composer install --no-scripts --no-dev
 RUN php artisan clear-compiled
 RUN php artisan optimize
+
 RUN php artisan migrate
 
 
