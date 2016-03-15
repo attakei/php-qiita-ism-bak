@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Config;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Validator;
@@ -76,7 +77,12 @@ class AuthController extends Controller
 
     public function redirectToProvider()
     {
-        return Socialite::driver('google')->redirect();
+        $driver = Socialite::driver('google');
+        $domain = Config::get('services.google.apps_domain');
+        if ($domain != '') {
+            $driver->with(['hd' => $domain]);
+        }
+        return $driver->redirect();
     }
 
     public function callbackFromProvider(Request $request, Guard $auth)
