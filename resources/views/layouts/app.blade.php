@@ -79,6 +79,13 @@
 
     @yield('content')
 
+
+    <footer>
+        <hr>
+        <div class="container align-center">
+            <p>バージョン: <a href="https://github.com/attakei/php-qiita-ism" target="_blank">{{config('app.version')}}</a></p>
+        </div>
+    </footer>
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
