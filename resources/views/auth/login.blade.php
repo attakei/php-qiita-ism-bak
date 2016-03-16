@@ -12,7 +12,7 @@
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
+                            <label class="col-md-4 control-label">メールアドレス</label>
 
                             <div class="col-md-6">
                                 <input type="email" class="form-control" name="email" value="{{ old('email') }}">
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Password</label>
+                            <label class="col-md-4 control-label">パスワード</label>
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password">
@@ -55,7 +55,7 @@
                                     <i class="fa fa-btn fa-sign-in"></i>Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                                <a class="btn btn-link" href="{{ url('/password/reset') }}">パスワードを忘れてた場合はこちら</a>
                             </div>
                         </div>
                     </form>
@@ -63,13 +63,13 @@
             </div>
             @endif
             <div class="panel panel-default">
-                <div class="panel-heading">OAuth login</div>
+                <div class="panel-heading">OAuth認証</div>
                 <div class="panel-body">
                     <div class="col-md-offset-2">
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('auth_oauth_google') }}">
                         {!! csrf_field() !!}
                         <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-btn fa-sign-in"></i>Login as Google
+                            <i class="fa fa-btn fa-sign-in"></i>Googleアカウントでログイン
                         </button>
                         </form>
                     </div>
