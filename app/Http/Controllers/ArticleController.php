@@ -86,9 +86,12 @@ class ArticleController extends Controller
             'body' => $request->input('articleBody'),
             'status' => $request->input('articleStatus'),
         ];
-        if ($request->input('_article_id')) {
+        if ($request->input('_articleId')) {
             // TODO: 編集権がない場合は、ここでエラー処理
-            $article = Article::find($request->input('_article_id'));
+            $article = Article::find($request->input('_articleId'));
+            if (is_null( $article ) || $article->author->id != Auth::user()->id) {
+                return abort(404);
+            }
             $message = 'Article is updated';
         } else {
             $article = Article::create(['author_id' => Auth::user()->id]);

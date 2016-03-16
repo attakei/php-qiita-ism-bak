@@ -59,4 +59,44 @@ class ArticleControllerTest extends TestCase
         $response = $this->action('GET', 'ArticleController@editForm', ['articleId' => 2]);
         $this->assertEquals($response->getStatusCode(), 404);
     }
+
+    /**
+     * 自分以外の投稿のうち、下書きに対する操作権がないこと
+     *
+     * @return void
+     */
+    public function testPostNotAuthor()
+    {
+        $this->injectFixtures();
+        $this->be(User::find(2));
+        $this->withSession([]);
+        $response = $this->call('POST', '/articles/2/_edit', [
+            '_token' => csrf_token(),
+            'articleTitle' => 'Test',
+            'articleBody' => 'Test body',
+            'articleStatus' => 'draft',
+            '_articleId' => 2,
+        ]);
+        $this->assertEquals($response->getStatusCode(), 404);
+    }
+
+    /**
+     * 自分以外の投稿のうち、下書きに対する操作権がないこと
+     *
+     * @return void
+     */
+    public function testPostIdNotExists()
+    {
+        $this->injectFixtures();
+        $this->be(User::find(2));
+        $this->withSession([]);
+        $response = $this->call('POST', '/articles/3/_edit', [
+            '_token' => csrf_token(),
+            'articleTitle' => 'Test',
+            'articleBody' => 'Test body',
+            'articleStatus' => 'draft',
+            '_articleId' => 3,
+        ]);
+        $this->assertEquals($response->getStatusCode(), 404);
+    }
 }
