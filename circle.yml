@@ -10,4 +10,6 @@ deployment:
   production:
     branch: master
     commands:
-      - bash ./deploy.sh
+      - git remote add dokku dokku@lab.attakei.net:qiita
+      - git push dokku master
+
