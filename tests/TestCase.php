@@ -20,6 +20,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     public function createApplication()
     {
         putenv('DB_CONNECTION=sqlite_testing');
+        putenv('SESSION_DRIVER=array');
 
         $app = require __DIR__.'/../bootstrap/app.php';
 
