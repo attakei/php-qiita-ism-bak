@@ -1,26 +1,43 @@
-# Laravel PHP Framework
+# PHP Qiita-ism (仮)
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+PHPで実装された、プライベート環境向けQiita系サイトです
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## 動かす
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+### 必要環境
 
-## Official Documentation
+* Laravel 5.2系が動くPHP
+* RDBサービス(MySQL, SQLite)
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+### 動かし方
 
-## Contributing
+```bash
+$ composer install --no-scripts --no-dev
+$ php artisan migrate
+$ php artisan serve
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+## 運用環境デプロイ
 
-## Security Vulnerabilities
+masterブランチは原則、いつ運用環境に反映されてもいいようにしてください
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+### 事前に
+
+なるべく次のことは確認してください
+
+* PHPUnitで既存テストが一通り通ること
+* artisanでのビルトインサーバで簡単な動作ができていること
+
+## ブランチ運用(暫定版)
+
+* master
+    * リリース対象ブランチ。基本的にこのブランチはいつ運用環境にデプロイされてしまってもいいようにしておく
+* release/XXX
+    * リリース後ブランチ。ドキュメント修正や簡単な文言調整はこちらで？
+* develop/XXX
+    * 開発ブランチ
+* feature/XXX/YYY
+    * 開発ブランチ(単機能)
 
 ## License
 
