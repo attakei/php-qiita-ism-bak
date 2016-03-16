@@ -6,3 +6,8 @@ test:
   pre:
     - cp .env.example .env
     - php artisan key:generate
+deployment:
+  production:
+    branch: master
+    commands:
+      - bash ./deploy.sh
