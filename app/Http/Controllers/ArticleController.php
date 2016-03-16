@@ -50,7 +50,11 @@ class ArticleController extends Controller
         if ( is_null($article) ) {
             return abort(404);
         }
-        // TODO: 編集権がない場合のエラー処理
+        // 閲覧権がない場合
+        // MEMO: モデル側に書く？(Auth::userが必要なので、こっちでもよい？)
+        if (Auth::user()->id != $article->author_id) {
+            return abort(404);
+        }
         return view('article.form', [
             'article' => $article,
         ]);

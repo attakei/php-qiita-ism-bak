@@ -35,10 +35,14 @@ class ArticleControllerTest extends TestCase
         $this->assertEquals($response->getStatusCode(), 200);
         $response = $this->action('GET', 'ArticleController@getOne', ['articleId' => 2]);
         $this->assertEquals($response->getStatusCode(), 200);
+        $response = $this->action('GET', 'ArticleController@editForm', ['articleId' => 1]);
+        $this->assertEquals($response->getStatusCode(), 200);
+        $response = $this->action('GET', 'ArticleController@editForm', ['articleId' => 2]);
+        $this->assertEquals($response->getStatusCode(), 200);
     }
 
     /**
-     * 自分以外の投稿のうち、下書きはみられないこと
+     * 自分以外の投稿のうち、下書きに対する操作権がないこと
      *
      * @return void
      */
@@ -49,6 +53,10 @@ class ArticleControllerTest extends TestCase
         $response = $this->action('GET', 'ArticleController@getOne', ['articleId' => 1]);
         $this->assertEquals($response->getStatusCode(), 200);
         $response = $this->action('GET', 'ArticleController@getOne', ['articleId' => 2]);
+        $this->assertEquals($response->getStatusCode(), 404);
+        $response = $this->action('GET', 'ArticleController@editForm', ['articleId' => 1]);
+        $this->assertEquals($response->getStatusCode(), 404);
+        $response = $this->action('GET', 'ArticleController@editForm', ['articleId' => 2]);
         $this->assertEquals($response->getStatusCode(), 404);
     }
 }
