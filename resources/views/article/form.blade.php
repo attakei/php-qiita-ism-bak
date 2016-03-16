@@ -20,7 +20,7 @@
             @endif
             <form method="post">
                 {!! csrf_field() !!}
-                {{ Form::hidden('_article_id', $article->id) }}
+                {{ Form::hidden('_articleId', $article->id) }}
                 <div class="form-group">
                     <input class="form-control" type="text" name="articleTitle" placeholder="Title ?" value="{{$article->title}}">
                 </div>
