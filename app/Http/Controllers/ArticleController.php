@@ -17,7 +17,6 @@ class ArticleController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -25,7 +24,9 @@ class ArticleController extends Controller
     }
 
     /**
-     * Display new article form
+     * 記事投稿用フォームを表示させる
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
      */
     public function newForm()
     {
@@ -35,6 +36,13 @@ class ArticleController extends Controller
         );
     }
 
+    /**
+     * 記事編集用フォームを表示させる。
+     * 指定された記事IDが存在しない場合、編集権がない場合はHTTPステータス404を返す。
+     *
+     * @param $articleId 記事ID
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+     */
     public function editForm($articleId)
     {
         $article = Article::find($articleId);
@@ -42,12 +50,19 @@ class ArticleController extends Controller
         if ( is_null($article) ) {
             return abort(404);
         }
+        // TODO: 編集権がない場合のエラー処理
         return view('article.form', [
             'article' => $article,
         ]);
 
     }
 
+    /**
+     * 記事を登録(新規,変更両方)する
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function postOne(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -68,6 +83,7 @@ class ArticleController extends Controller
             'status' => $request->input('articleStatus'),
         ];
         if ($request->input('_article_id')) {
+            // TODO: 編集権がない場合は、ここでエラー処理
             $article = Article::find($request->input('_article_id'));
             $message = 'Article is updated';
         } else {
@@ -85,6 +101,13 @@ class ArticleController extends Controller
         return redirect(route('get_article_single', ['articleId' => $article->id]));
     }
 
+    /**
+     * 指定された記事を表示する。
+     * 存在しない記事IDや閲覧権がない記事IDが指定されたらHTTPステータス404を返す。
+     *
+     * @param $articleId 記事ID
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+     */
     public function getOne($articleId)
     {
         $article = Article::find($articleId);
@@ -92,6 +115,7 @@ class ArticleController extends Controller
         if ( is_null($article) ) {
             return abort(404);
         }
+        // TODO: 閲覧権がない場合のエラー処理
 
         // Render article
         return view('article.single', [
@@ -101,18 +125,17 @@ class ArticleController extends Controller
     }
 
     /**
-     * 表示可能な記事リストを表示する
+     * 表示可能な記事リストを表示する。
      *
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getList()
     {
-        // TODO: Move to model method
+        // TODO: モデルクラスに移植する？
         $articles = Article::latest()->where('status', 'internal')->paginate(static::ITEMS_PER_PAGE);
 
-        // TODO: If $articles is not values ?
-
+        // TODO: 記事がない場合の処理が必要？
 
         // Render articles
         return view('article.list', [

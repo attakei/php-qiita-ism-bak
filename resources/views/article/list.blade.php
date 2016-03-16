@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <h1>Latest articles ({{ $articles->currentPage() }}/{{$articles->lastPage()}})</h1>
+        <h1>最近の記事 ({{ $articles->currentPage() }}/{{$articles->lastPage()}})</h1>
     </div>
     <div class="row">
         @foreach($articles as $article)

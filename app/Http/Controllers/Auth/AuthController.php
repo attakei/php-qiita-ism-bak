@@ -77,6 +77,7 @@ class AuthController extends Controller
 
     public function redirectToProvider()
     {
+        // TODO: Oauthドライバー名が固定されている
         $driver = Socialite::driver('google');
         $domain = Config::get('services.google.apps_domain');
         if ($domain != '') {
@@ -87,6 +88,7 @@ class AuthController extends Controller
 
     public function callbackFromProvider(Request $request, Guard $auth)
     {
+        // TODO: Oauthドライバー名が固定されている
         $userData = Socialite::with('google')->user();
         $user = User::query()->where('email', '=', $userData->getEmail())->first();
         if ( is_null($user) ) {

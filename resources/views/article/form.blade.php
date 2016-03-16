@@ -3,7 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
+        @if($article->id)
+        <h1>記事編集</h1>
+        @else
         <h1>新規投稿追加</h1>
+        @endif
         <div class="col-md-10">
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
